@@ -1,0 +1,19 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserdata
+*.xcworkspace/xcuserdata/
+xcuserdata/
+
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Dependencies
+Pods/
+Carthage/
+
+# SwiftPM
+.build/
+Package.resolved
