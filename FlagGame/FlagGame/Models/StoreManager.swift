@@ -1,33 +1,25 @@
+import Foundation
 import StoreKit
-import SwiftUI
 
 @MainActor
 class StoreManager: ObservableObject {
-    @Published private(set) var isUnlocked: Bool = false
-    @Published private(set) var product: Product?
-    @Published private(set) var purchaseState: PurchaseState = .idle
+    @Published var isUnlocked: Bool = false
+    @Published var purchaseState: PurchaseState = .idle
+    @Published var product: Product?
 
-    enum PurchaseState: Equatable {
-        case idle
-        case purchasing
-        case purchased
-        case pending
-        case failed(String)
+    enum PurchaseState {
+        case idle, purchasing, purchased, pending, failed(String)
     }
 
-    static let productID = "com.flagexplorer.fullaccess"
-
-    private var transactionListener: Task<Void, Error>?
+    private let productID = "com.flagexplorer.fullaccess"
+    private let unlockedKey = "isUnlocked"
+    private var transactionListener: Task<Void, Never>?
 
     init() {
-        isUnlocked = UserDefaults.standard.bool(forKey: "isFullAccessUnlocked")
-
+        isUnlocked = UserDefaults.standard.bool(forKey: unlockedKey)
         transactionListener = listenForTransactions()
-
-        Task {
-            await loadProduct()
-            await checkEntitlement()
-        }
+        Task { await loadProduct() }
+        Task { await checkEntitlement() }
     }
 
     deinit {
@@ -38,10 +30,10 @@ class StoreManager: ObservableObject {
 
     func loadProduct() async {
         do {
-            let products = try await Product.products(for: [Self.productID])
+            let products = try await Product.products(for: [productID])
             product = products.first
         } catch {
-            print("Failed to load product: \(error)")
+            print("Failed to load products: \(error)")
         }
     }
 
@@ -49,117 +41,99 @@ class StoreManager: ObservableObject {
 
     func purchase() async {
         guard let product else {
-            purchaseState = .failed("Product not available. Check your connection.")
+            purchaseState = .failed("Product not available")
             return
         }
-
         purchaseState = .purchasing
-
         do {
             let result = try await product.purchase()
-
             switch result {
             case .success(let verification):
-                switch verification {
-                case .verified(let transaction):
-                    await transaction.finish()
-                    unlock()
-                case .unverified:
-                    purchaseState = .failed("Purchase could not be verified.")
-                }
-
-            case .userCancelled:
-                purchaseState = .idle
-
+                let transaction = try checkVerified(verification)
+                await transaction.finish()
+                unlock()
+                purchaseState = .purchased
             case .pending:
                 purchaseState = .pending
-
+            case .userCancelled:
+                purchaseState = .idle
             @unknown default:
                 purchaseState = .idle
             }
         } catch {
-            purchaseState = .failed("Purchase failed. Please try again.")
+            purchaseState = .failed(error.localizedDescription)
         }
     }
 
     // MARK: - Restore
 
-    func restorePurchase() async {
-        purchaseState = .purchasing
-
-        var found = false
-        for await result in Transaction.currentEntitlements {
-            if case .verified(let transaction) = result,
-               transaction.productID == Self.productID {
-                await transaction.finish()
-                unlock()
-                found = true
-                break
-            }
-        }
-
-        if !found {
-            purchaseState = .failed("No previous purchase found.")
-        }
+    func restore() async {
+        try? await AppStore.sync()
+        await checkEntitlement()
     }
 
-    // MARK: - Check Entitlement
+    // MARK: - Entitlement
 
     func checkEntitlement() async {
-        var entitled = false
         for await result in Transaction.currentEntitlements {
-            if case .verified(let transaction) = result,
-               transaction.productID == Self.productID {
-                entitled = true
-                await transaction.finish()
-                break
+            if let transaction = try? checkVerified(result),
+               transaction.productID == productID {
+                unlock()
+                return
             }
         }
-
-        if entitled {
-            unlock()
-        } else if isUnlocked {
-            // Handle refund: was unlocked but no longer entitled
+        if !isUnlocked {
             lock()
         }
     }
 
     // MARK: - Transaction Listener
 
-    private func listenForTransactions() -> Task<Void, Error> {
+    private func listenForTransactions() -> Task<Void, Never> {
         Task.detached { [weak self] in
             for await result in Transaction.updates {
-                if case .verified(let transaction) = result {
+                switch result {
+                case .verified(let transaction):
                     await transaction.finish()
-                    await self?.checkEntitlement()
+                    await self?.unlock()
+                case .unverified:
+                    break
                 }
             }
         }
     }
 
-    // MARK: - State Updates
+    private nonisolated func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
+        switch result {
+        case .unverified:
+            throw StoreError.verification
+        case .verified(let value):
+            return value
+        }
+    }
 
-    private func unlock() {
+    // MARK: - State
+
+    func unlock() {
         isUnlocked = true
-        UserDefaults.standard.set(true, forKey: "isFullAccessUnlocked")
-        purchaseState = .purchased
+        UserDefaults.standard.set(true, forKey: unlockedKey)
     }
 
     private func lock() {
         isUnlocked = false
-        UserDefaults.standard.set(false, forKey: "isFullAccessUnlocked")
-        purchaseState = .idle
+        UserDefaults.standard.set(false, forKey: unlockedKey)
     }
-
-    // MARK: - Debug
 
     #if DEBUG
     func debugUnlock() {
         unlock()
     }
-
     func debugLock() {
         lock()
     }
     #endif
+
+    enum StoreError: Error {
+        case verification
+    }
 }

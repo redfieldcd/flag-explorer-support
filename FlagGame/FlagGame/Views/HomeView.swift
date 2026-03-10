@@ -7,9 +7,13 @@ struct HomeView: View {
         ZStack {
             // Background gradient
             LinearGradient(
-                colors: [Color(red: 0.15, green: 0.35, blue: 0.65), Color(red: 0.25, green: 0.55, blue: 0.85)],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
+                colors: [
+                    Color(red: 0.43, green: 0.74, blue: 0.91),  // #6DBCE8 - light blue (top)
+                    Color(red: 0.23, green: 0.43, blue: 0.56),  // #3A6E8E - mid blue
+                    Color(red: 0.20, green: 0.36, blue: 0.56)   // #335B90 - dark blue (bottom)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
             )
             .ignoresSafeArea()
 

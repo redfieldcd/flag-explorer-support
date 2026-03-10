@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA000001 /* FlagGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000010; };
-		AA000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000011; };
-		AA000003 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012; };
-		AA000004 /* CountryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000013; };
-		AA000005 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000014; };
-		AA000006 /* StudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000015; };
-		AA000007 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000016; };
-		AA000008 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000017; };
-		AA000009 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000018; };
-		AA00000A /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000019; };
-		AA00000B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000020; };
-		AA00000C /* RegionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000021; };
-		AA00000D /* FlagCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000022; };
-		AA00000E /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000023; };
-		AA00000F /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000024; };
-		AA000100 /* UsageTimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000025; };
-		AA000101 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000026; };
+		AA000001 /* FlagGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000010 /* FlagGameApp.swift */; };
+		AA000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000011 /* ContentView.swift */; };
+		AA000003 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012 /* Country.swift */; };
+		AA000004 /* CountryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000013 /* CountryData.swift */; };
+		AA000005 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000014 /* HomeView.swift */; };
+		AA000006 /* StudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000015 /* StudyView.swift */; };
+		AA000007 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000016 /* QuizView.swift */; };
+		AA000008 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000017 /* ProgressView.swift */; };
+		AA000009 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000018 /* SpeechManager.swift */; };
+		AA00000A /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000019 /* GameViewModel.swift */; };
+		AA00000B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000020 /* Assets.xcassets */; };
+		AA00000C /* RegionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000021 /* RegionPickerView.swift */; };
+		AA00000D /* FlagCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000022 /* FlagCardView.swift */; };
+		AA00000E /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000023 /* QuizResultView.swift */; };
+		AA00000F /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000024 /* StoreManager.swift */; };
+		AA000100 /* UsageTimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000025 /* UsageTimerManager.swift */; };
+		AA000101 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000026 /* PaywallView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,7 +127,7 @@
 /* Begin PBXNativeTarget section */
 		AA000060 /* FlagGame */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA000070;
+			buildConfigurationList = AA000070 /* Build configuration list for PBXNativeTarget "FlagGame" */;
 			buildPhases = (
 				AA000061 /* Sources */,
 				AA000040 /* Frameworks */,
@@ -150,14 +150,14 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					AA000060 = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
 			};
-			buildConfigurationList = AA000081;
+			buildConfigurationList = AA000081 /* Build configuration list for PBXProject "FlagGame" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -248,6 +248,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 8E8D53UH68;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -271,6 +272,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -311,6 +313,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 8E8D53UH68;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -327,6 +330,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -338,10 +342,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"FlagGame/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -351,8 +356,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flaggame.FlagGame;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dancao.FlagExplorer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -366,10 +371,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"FlagGame/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -379,8 +385,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flaggame.FlagGame;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dancao.FlagExplorer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -391,20 +397,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AA000081 /* Build configuration list for PBXProject "FlagGame" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AA000090 /* Debug */,
-				AA000091 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		AA000070 /* Build configuration list for PBXNativeTarget "FlagGame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA000092 /* Debug */,
 				AA000093 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA000081 /* Build configuration list for PBXProject "FlagGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA000090 /* Debug */,
+				AA000091 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

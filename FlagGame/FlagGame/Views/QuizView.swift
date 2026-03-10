@@ -79,7 +79,8 @@ struct QuizView: View {
                                 country: option,
                                 isSelected: viewModel.selectedAnswer == option,
                                 isCorrect: option == country,
-                                showResult: viewModel.selectedAnswer != nil
+                                showResult: viewModel.selectedAnswer != nil,
+                                onSpeak: { viewModel.speechManager.speak(option.name) }
                             ) {
                                 viewModel.selectQuizAnswer(option)
                             }
@@ -112,6 +113,7 @@ struct QuizOptionButton: View {
     let isSelected: Bool
     let isCorrect: Bool
     let showResult: Bool
+    let onSpeak: () -> Void
     let action: () -> Void
 
     private var backgroundColor: Color {
@@ -148,33 +150,41 @@ struct QuizOptionButton: View {
     }
 
     var body: some View {
-        Button(action: action) {
-            HStack(spacing: 12) {
-                Text(country.flag)
-                    .font(.system(size: 28))
+        HStack(spacing: 8) {
+            Button(action: action) {
+                HStack(spacing: 12) {
+                    Text(country.name)
+                        .font(.system(size: 17, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.primary)
 
-                Text(country.name)
-                    .font(.system(size: 17, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.primary)
+                    Spacer()
 
-                Spacer()
-
-                if let icon {
-                    Image(systemName: icon)
-                        .font(.system(size: 22))
-                        .foregroundStyle(isCorrect ? .green : .red)
+                    if let icon {
+                        Image(systemName: icon)
+                            .font(.system(size: 22))
+                            .foregroundStyle(isCorrect ? .green : .red)
+                    }
                 }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 14)
+                .background(backgroundColor)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(borderColor, lineWidth: 2)
+                )
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 14)
-            .background(backgroundColor)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(borderColor, lineWidth: 2)
-            )
+            .disabled(showResult)
+
+            Button(action: onSpeak) {
+                Image(systemName: "speaker.wave.2.fill")
+                    .font(.system(size: 14))
+                    .foregroundStyle(.orange)
+                    .frame(width: 44, height: 44)
+                    .background(Color.orange.opacity(0.12))
+                    .clipShape(Circle())
+            }
         }
-        .disabled(showResult)
         .animation(.spring(response: 0.3), value: showResult)
     }
 }
